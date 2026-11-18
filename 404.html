@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <base href="/pickmachine/">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="뽑기 머신 - 명단으로 공정하게 뽑아 주는 룰렛·사다리·팀 나누기·자리 배치·마니또·토너먼트">
+  <meta name="theme-color" content="#FF8FB8">
+  <!-- 아이폰 홈 화면 추가용 -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="뽑기 머신">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <title>뽑기 머신</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    html, body { margin: 0; height: 100%; background: linear-gradient(160deg, #FFE3F0, #EADFFF 55%, #D8F3FF); }
+    @media (prefers-color-scheme: dark) { html, body { background: linear-gradient(160deg, #2A1F45, #1C1633); } }
+    #loading { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+               font-family: sans-serif; gap: 14px; }
+    #loading img { width: 150px; animation: bounce .8s ease-in-out infinite alternate; }
+    #loading .t { font-size: 22px; font-weight: bold; color: #E0609A; }
+    @keyframes bounce { from { transform: translateY(0) rotate(-4deg); } to { transform: translateY(-14px) rotate(4deg); } }
+  </style>
+</head>
+<body>
+  <div id="loading"><img src="icons/Icon-512.png" alt=""><div class="t">뽑기 머신 준비 중…</div></div>
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      var l = document.getElementById('loading'); if (l) l.remove();
+    });
+  </script>
+  <!-- 접속 카운터 (통계: VisitStats). GitHub Pages 주소에서 열렸을 때만 센다. -->
+  <script>
+    (function () {
+      try {
+        if (!/\.github\.io$/.test(location.hostname)) return;
+        var APP = 'pickmachine';
+        var today = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+        var isNew = false;
+        try {
+          var k = 'vc_day_' + APP;
+          if (localStorage.getItem(k) !== today) { localStorage.setItem(k, today); isNew = true; }
+        } catch (e) {}
+        var src = /; wv\)/.test(navigator.userAgent) ? 'apk' : 'web';
+        fetch('https://fderhgftwfsbaumlkxxe.supabase.co/rest/v1/rpc/track_visit', {
+          method: 'POST', keepalive: true,
+          headers: { 'apikey': 'sb_publishable_CegmHgYuVKWcXKoV54fiKg_ylq3F2xL', 'Content-Type': 'application/json' },
+          body: JSON.stringify({ p_app: APP, p_src: src, p_new: isNew })
+        }).catch(function () {});
+      } catch (e) {}
+    })();
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
